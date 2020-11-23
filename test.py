@@ -7,7 +7,8 @@ z0 = get_noise(10, 96)
 z1 = get_noise(10, 96)
 w = torch.linspace(0, 1, 10).view(-1, 1, 1)
 G = Generator(input_dim=96)
-G.load_state_dict(torch.load('results/generator.pth'))
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+G.load_state_dict(torch.load('results/generator.pth', map_location=device))
 G.eval()
 
 # latent space interpolation
